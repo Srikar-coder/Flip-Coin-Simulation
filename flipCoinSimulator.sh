@@ -1,6 +1,8 @@
 #!/bin/bash -x
 
-for ((var=1; var<=10; var++))
+Heads=0
+Tails=0
+for ((;;))
 do
 toss=$((RANDOM%2))
 
@@ -10,6 +12,17 @@ then
 else
 ((Tails++))
 fi
+if [[ Heads -eq 21 || Tails -eq 21 ]]
+then
+break
+fi
 done
-echo number of heads $Heads
-echo number of tails $Tails
+if [ $Heads -eq $Tails ]
+then
+echo It is a Tie
+elif [ $Heads -gt $Tails ]
+then
+echo Heads won by $(($Heads-$Tails)) ponits
+else
+echo Tails won by $(($Tails-$Heads)) points
+fi
